@@ -1,0 +1,102 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <title>Encompassed.press</title>
+  <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+  <style>
+  #image{
+    max-height: 300px;
+    border-radius: 15px;
+  }
+
+  #content{
+    font-family: 'PT Serif', serif;
+  }
+
+  #worker{
+    width: inherit;
+  }
+  @media only screen AND (max-width: 736px) {
+    .mobileHidden {
+      display: none;
+    }
+  }
+  body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Serif', serif;
+  }
+  #moreinfo{
+    display: none;
+  }
+  </style>
+  <script>
+    function expand(){
+      $("#expand").hide();
+      $("#moreinfo").fadeIn();
+    }
+    function hide(){
+      $("#moreinfo").fadeOut();
+      $("#expand").show();
+    }
+  </script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-65059844-5', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body font-family="PT Serif">
+  <div class="mobileHidden"><br><br></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8"  id="content">
+        <div class="row">
+          <div class="thumbnail" id="worker">
+            <div id="text" class="caption">
+              <h1><strong>{{article["title"]}}</strong></h1>
+              <hr>
+              <p><h4>{% raw article["processed_description"] %}</h4></p>
+            </div>
+            <img src="{{article["image"]}}" alt="{% raw article["processed_description"] %}" id="image">
+            <div id="text" class="caption">
+              <p><i><small>from {{article["tld"]}} – last updated {{article["time"]}}</small></i></p>
+              <hr>
+              <p><a href="{{article["url"]}}" class="btn btn-primary btn-lg" role="button">Continue reading...</a></p>
+            </div>
+          </div>
+        </div>
+        Encompassed.press is an <a href="http://md-c.com">MD-C</a> project, made by Miles McCain.
+      </div>
+      <div class="col-lg-4">
+        <h1>Encompassed.press</h1>
+        <hr>
+        <h3><i>The single most encompassing and important news story, found automatically.</i></h3>
+        <hr>
+        <button onclick="expand()" class="btn btn-md btn-primary" id="expand">Learn More</button>
+        <div id="moreinfo">
+          <h3>Idea</h3>
+          Often in the news there is one single story that is significantly more "relevant" than the others, and Encompassed.press gives this one story to you. Instead of being bombarded by a page of headlines, Encompassed.press gives you just one article, the article it considers to be the most encompassing of the news -- <strong>the media condensed into one story.</strong>
+          <hr>
+          <h3>Process</h3>
+          <strong>Which story is the most encompassing or relevant is subjective,</strong> so there is no such thing as "the MOST important story." Encompassed.press uses artificial intelligence in order to rank stories and then find the most important one (from its perspective, of course).
+          <hr>
+          <h3>The Algorithm</h3>
+          To find the most important story, Encompassed.press scans lots of media outlets for their headlines. From this data, it tokenizes and stems the headlines (running, runs, and run all become run, for example) and then based on the frequency of the terms within each headline within the larger media corpus of all headlines, a "relevance score" is found. This score is then weighted against the "reputability" of the news source (which, I know, is completely subjective). Then, the article with the highest score is displayed.
+          <hr>
+          <h3>Frequency</h3>
+          To avoid sending too many requests to the media outlets, the algorithm is run and the top story is refreshed every 30 minutes.
+          <br><button onclick="hide()" class="btn btn-md btn-primary" id="expand">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
