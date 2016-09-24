@@ -31,9 +31,15 @@ def tokenize(text):
     text = "".join(c for c in text if c not in string.punctuation)
     return tokenizer.tokenize(text)
 
+
 def remove_stopwords(text):
     filtered_words = [word for word in text if word not in stopwords.words('english')]
     return filtered_words
+
+
+def sanitize_description(description):
+    return description.replace("Continue reading...", "").replace("\n", " ")  # let's work on this... maybe TODO?
+
 
 def get_most_relevant_article(articles):
     words = []
@@ -52,7 +58,7 @@ def get_most_relevant_article(articles):
     for article in articles:
         if highest is None or highest["relevance"] < article["relevance"]:
             highest = article
-    highest["processed_description"] = re.sub('<[^<]+?>', '', highest["description"])
+    highest["processed_description"] = sanitize_description(re.sub('<[^<]+?>', '', highest["description"]))
     highest["time"] = time.strftime("%d/%m/%Y") + " at " + time.strftime("%H:%M:%S")
     parsed_uri = urlparse(highest["url"])
     highest["tld"] = '{uri.netloc}'.format(uri=parsed_uri)
